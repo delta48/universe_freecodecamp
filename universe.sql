@@ -16,6 +16,29 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+DROP DATABASE universe;
+--
+-- Name: universe; Type: DATABASE; Schema: -; Owner: freecodecamp
+--
+
+CREATE DATABASE universe WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'C.UTF-8' LC_CTYPE = 'C.UTF-8';
+
+
+ALTER DATABASE universe OWNER TO freecodecamp;
+
+\connect universe
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -178,87 +201,77 @@ ALTER TABLE public.star ALTER COLUMN star_id ADD GENERATED ALWAYS AS IDENTITY (
 -- Data for Name: galaxy; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-COPY public.galaxy (galaxy_id, name, galaxy_type, distance_mly, number_of_stars_bil, is_spiral, notes) FROM stdin;
-1	Milky Way	Barred Spiral	0.00	250	t	Home galaxy
-2	Andromeda	Spiral	2.54	1000	t	M31
-3	Triangulum	Spiral	2.73	40	t	M33
-4	Whirlpool	Spiral	23.00	100	t	M51
-5	Sombrero	Lenticular	29.30	800	f	M104
-6	Large Magellanic Cloud	Irregular	0.16	30	f	Satellite of Milky Way
-\.
+INSERT INTO public.galaxy OVERRIDING SYSTEM VALUE VALUES (1, 'Milky Way', 'Barred Spiral', 0.00, 250, true, 'Home galaxy');
+INSERT INTO public.galaxy OVERRIDING SYSTEM VALUE VALUES (2, 'Andromeda', 'Spiral', 2.54, 1000, true, 'M31');
+INSERT INTO public.galaxy OVERRIDING SYSTEM VALUE VALUES (3, 'Triangulum', 'Spiral', 2.73, 40, true, 'M33');
+INSERT INTO public.galaxy OVERRIDING SYSTEM VALUE VALUES (4, 'Whirlpool', 'Spiral', 23.00, 100, true, 'M51');
+INSERT INTO public.galaxy OVERRIDING SYSTEM VALUE VALUES (5, 'Sombrero', 'Lenticular', 29.30, 800, false, 'M104');
+INSERT INTO public.galaxy OVERRIDING SYSTEM VALUE VALUES (6, 'Large Magellanic Cloud', 'Irregular', 0.16, 30, false, 'Satellite of Milky Way');
 
 
 --
 -- Data for Name: moon; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-COPY public.moon (moon_id, name, planet_id, radius_km, is_tidally_locked, is_inhabited, description) FROM stdin;
-1	Luna	3	1737	t	f	Earth's moon
-2	Phobos	4	11	t	f	Mars moon
-3	Deimos	4	6	t	f	Mars moon
-4	Io	5	1821	t	f	Volcanic
-5	Europa	5	1560	t	f	Icy ocean world candidate
-6	Ganymede	5	2634	t	f	Largest moon
-7	Callisto	5	2410	t	f	Heavily cratered
-8	Mimas	6	198	t	f	Saturn moon
-9	Enceladus	6	252	t	f	Geysers
-10	Tethys	6	531	t	f	Icy
-11	Dione	6	561	t	f	Icy
-12	Rhea	6	764	t	f	Second-largest Saturn moon
-13	Titan	6	2574	t	f	Thick atmosphere
-14	Iapetus	6	734	t	f	Two-tone
-15	Miranda	7	236	t	f	Weird terrain
-16	Ariel	7	578	t	f	Uranus moon
-17	Umbriel	7	584	t	f	Dark surface
-18	Titania	7	789	t	f	Largest Uranus moon
-19	Oberon	7	761	t	f	Outer major moon
-20	Triton	8	1353	t	f	Retrograde orbit
-\.
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (1, 'Luna', 3, 1737, true, false, 'Earth''s moon');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (2, 'Phobos', 4, 11, true, false, 'Mars moon');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (3, 'Deimos', 4, 6, true, false, 'Mars moon');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (4, 'Io', 5, 1821, true, false, 'Volcanic');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (5, 'Europa', 5, 1560, true, false, 'Icy ocean world candidate');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (6, 'Ganymede', 5, 2634, true, false, 'Largest moon');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (7, 'Callisto', 5, 2410, true, false, 'Heavily cratered');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (8, 'Mimas', 6, 198, true, false, 'Saturn moon');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (9, 'Enceladus', 6, 252, true, false, 'Geysers');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (10, 'Tethys', 6, 531, true, false, 'Icy');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (11, 'Dione', 6, 561, true, false, 'Icy');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (12, 'Rhea', 6, 764, true, false, 'Second-largest Saturn moon');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (13, 'Titan', 6, 2574, true, false, 'Thick atmosphere');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (14, 'Iapetus', 6, 734, true, false, 'Two-tone');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (15, 'Miranda', 7, 236, true, false, 'Weird terrain');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (16, 'Ariel', 7, 578, true, false, 'Uranus moon');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (17, 'Umbriel', 7, 584, true, false, 'Dark surface');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (18, 'Titania', 7, 789, true, false, 'Largest Uranus moon');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (19, 'Oberon', 7, 761, true, false, 'Outer major moon');
+INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (20, 'Triton', 8, 1353, true, false, 'Retrograde orbit');
 
 
 --
 -- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-COPY public.planet (planet_id, name, star_id, planet_type, radius_km, orbital_period_days, has_rings, has_life) FROM stdin;
-1	Mercury	1	Terrestrial	2440	88	f	f
-2	Venus	1	Terrestrial	6052	225	f	f
-3	Earth	1	Terrestrial	6371	365	f	t
-4	Mars	1	Terrestrial	3389	687	f	f
-5	Jupiter	1	Gas Giant	69911	4333	t	f
-6	Saturn	1	Gas Giant	58232	10759	t	f
-7	Uranus	1	Ice Giant	25362	30687	t	f
-8	Neptune	1	Ice Giant	24622	60190	t	f
-9	Proxima b	2	Terrestrial	7160	11	f	f
-10	Sirius b I	3	Rocky	3500	30	f	f
-11	Vega I	4	Rocky	4000	20	f	f
-12	Rigel I	5	Gas Giant	80000	200	t	f
-\.
+INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (1, 'Mercury', 1, 'Terrestrial', 2440, 88, false, false);
+INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (2, 'Venus', 1, 'Terrestrial', 6052, 225, false, false);
+INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (3, 'Earth', 1, 'Terrestrial', 6371, 365, false, true);
+INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (4, 'Mars', 1, 'Terrestrial', 3389, 687, false, false);
+INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (5, 'Jupiter', 1, 'Gas Giant', 69911, 4333, true, false);
+INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (6, 'Saturn', 1, 'Gas Giant', 58232, 10759, true, false);
+INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (7, 'Uranus', 1, 'Ice Giant', 25362, 30687, true, false);
+INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (8, 'Neptune', 1, 'Ice Giant', 24622, 60190, true, false);
+INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (9, 'Proxima b', 2, 'Terrestrial', 7160, 11, false, false);
+INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (10, 'Sirius b I', 3, 'Rocky', 3500, 30, false, false);
+INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (11, 'Vega I', 4, 'Rocky', 4000, 20, false, false);
+INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (12, 'Rigel I', 5, 'Gas Giant', 80000, 200, true, false);
 
 
 --
 -- Data for Name: space_agency; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-COPY public.space_agency (space_agency_id, name, country, founded_year, is_active) FROM stdin;
-1	NASA	USA	1958	t
-2	ESA	Europe	1975	t
-3	JAXA	Japan	2003	t
-\.
+INSERT INTO public.space_agency OVERRIDING SYSTEM VALUE VALUES (1, 'NASA', 'USA', 1958, true);
+INSERT INTO public.space_agency OVERRIDING SYSTEM VALUE VALUES (2, 'ESA', 'Europe', 1975, true);
+INSERT INTO public.space_agency OVERRIDING SYSTEM VALUE VALUES (3, 'JAXA', 'Japan', 2003, true);
 
 
 --
 -- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-COPY public.star (star_id, name, galaxy_id, spectral_class, temperature_k, mass_solar, is_active) FROM stdin;
-1	Sun	1	G2V	5778	1.000	t
-2	Proxima Centauri	1	M5.5V	3042	0.122	t
-3	Sirius	1	A1V	9940	2.063	t
-4	Vega	1	A0V	9602	2.135	t
-5	Rigel	1	B8Ia	12100	17.000	t
-6	Alpheratz	2	B9IV	13800	3.600	t
-\.
+INSERT INTO public.star OVERRIDING SYSTEM VALUE VALUES (1, 'Sun', 1, 'G2V', 5778, 1.000, true);
+INSERT INTO public.star OVERRIDING SYSTEM VALUE VALUES (2, 'Proxima Centauri', 1, 'M5.5V', 3042, 0.122, true);
+INSERT INTO public.star OVERRIDING SYSTEM VALUE VALUES (3, 'Sirius', 1, 'A1V', 9940, 2.063, true);
+INSERT INTO public.star OVERRIDING SYSTEM VALUE VALUES (4, 'Vega', 1, 'A0V', 9602, 2.135, true);
+INSERT INTO public.star OVERRIDING SYSTEM VALUE VALUES (5, 'Rigel', 1, 'B8Ia', 12100, 17.000, true);
+INSERT INTO public.star OVERRIDING SYSTEM VALUE VALUES (6, 'Alpheratz', 2, 'B9IV', 13800, 3.600, true);
 
 
 --
@@ -403,3 +416,4 @@ ALTER TABLE ONLY public.star
 --
 -- PostgreSQL database dump complete
 --
+
